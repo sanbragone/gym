@@ -1,12 +1,4 @@
-const days = [
-  'lunes',
-  'martes',
-  'miercoles',
-  'jueves',
-  'viernes',
-  'sabado',
-  'domingo'
-];
+const days = ['Dia 1', 'Día 2', 'Día 3', 'Día 4'];
 const dayNav = document.getElementById('day-nav');
 const list = document.getElementById('exercise-list');
 const form = document.getElementById('exercise-form');
@@ -15,7 +7,7 @@ let currentDay = null;
 function buildNav() {
   days.forEach((day) => {
     const btn = document.createElement('button');
-    btn.textContent = day.charAt(0).toUpperCase();
+    btn.textContent = day;
     btn.dataset.day = day;
     btn.addEventListener('click', () => loadDay(day));
     dayNav.appendChild(btn);
@@ -53,6 +45,4 @@ form.addEventListener('submit', (e) => {
 });
 
 buildNav();
-const todayIndex = new Date().getDay();
-// JavaScript's getDay returns 0 for Sunday; adjust to our array
-loadDay(days[(todayIndex + 6) % 7]);
+loadDay(days[0]);
