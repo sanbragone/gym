@@ -30,7 +30,8 @@ function renderList(exercises) {
   exercises.forEach((ex, idx) => {
     const li = document.createElement('li');
     const span = document.createElement('span');
-    span.textContent = `${ex.name} - ${ex.reps} reps @ ${ex.weight}kg`;
+    const sets = ex.series ?? 1;
+    span.textContent = `${ex.name} - ${sets}x${ex.reps} @ ${ex.weight}kg`;
     li.appendChild(span);
 
     const actions = document.createElement('div');
@@ -56,6 +57,7 @@ function startEdit(idx) {
   const exercises = JSON.parse(localStorage.getItem(currentDay)) || [];
   const ex = exercises[idx];
   document.getElementById('exercise-name').value = ex.name;
+  document.getElementById('exercise-series').value = ex.series ?? '';
   document.getElementById('exercise-reps').value = ex.reps;
   document.getElementById('exercise-weight').value = ex.weight;
   editIndex = idx;
@@ -72,13 +74,14 @@ function deleteExercise(idx) {
 form.addEventListener('submit', (e) => {
   e.preventDefault();
   const name = document.getElementById('exercise-name').value.trim();
+  const series = parseInt(document.getElementById('exercise-series').value, 10);
   const reps = parseInt(document.getElementById('exercise-reps').value, 10);
   const weight = parseFloat(document.getElementById('exercise-weight').value);
   const exercises = JSON.parse(localStorage.getItem(currentDay)) || [];
   if (editIndex !== null) {
-    exercises[editIndex] = { name, reps, weight };
+    exercises[editIndex] = { name, series, reps, weight };
   } else {
-    exercises.push({ name, reps, weight });
+    exercises.push({ name, series, reps, weight });
   }
   localStorage.setItem(currentDay, JSON.stringify(exercises));
   renderList(exercises);
