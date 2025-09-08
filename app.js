@@ -2,7 +2,9 @@ const days = ['Dia 1', 'Día 2', 'Día 3', 'Día 4'];
 const dayNav = document.getElementById('day-nav');
 const list = document.getElementById('exercise-list');
 const form = document.getElementById('exercise-form');
+const submitBtn = form.querySelector('button');
 let currentDay = null;
+let editIndex = null;
 
 function buildNav() {
   days.forEach((day) => {
@@ -25,11 +27,46 @@ function loadDay(day) {
 
 function renderList(exercises) {
   list.innerHTML = '';
-  exercises.forEach((ex) => {
+  exercises.forEach((ex, idx) => {
     const li = document.createElement('li');
-    li.textContent = `${ex.name} - ${ex.reps} reps @ ${ex.weight}kg`;
+    const span = document.createElement('span');
+    span.textContent = `${ex.name} - ${ex.reps} reps @ ${ex.weight}kg`;
+    li.appendChild(span);
+
+    const actions = document.createElement('div');
+
+    const editBtn = document.createElement('button');
+    editBtn.type = 'button';
+    editBtn.textContent = 'Editar';
+    editBtn.addEventListener('click', () => startEdit(idx));
+    actions.appendChild(editBtn);
+
+    const delBtn = document.createElement('button');
+    delBtn.type = 'button';
+    delBtn.textContent = 'Eliminar';
+    delBtn.addEventListener('click', () => deleteExercise(idx));
+    actions.appendChild(delBtn);
+
+    li.appendChild(actions);
     list.appendChild(li);
   });
+}
+
+function startEdit(idx) {
+  const exercises = JSON.parse(localStorage.getItem(currentDay)) || [];
+  const ex = exercises[idx];
+  document.getElementById('exercise-name').value = ex.name;
+  document.getElementById('exercise-reps').value = ex.reps;
+  document.getElementById('exercise-weight').value = ex.weight;
+  editIndex = idx;
+  submitBtn.textContent = 'Guardar';
+}
+
+function deleteExercise(idx) {
+  const exercises = JSON.parse(localStorage.getItem(currentDay)) || [];
+  exercises.splice(idx, 1);
+  localStorage.setItem(currentDay, JSON.stringify(exercises));
+  renderList(exercises);
 }
 
 form.addEventListener('submit', (e) => {
@@ -38,10 +75,16 @@ form.addEventListener('submit', (e) => {
   const reps = parseInt(document.getElementById('exercise-reps').value, 10);
   const weight = parseFloat(document.getElementById('exercise-weight').value);
   const exercises = JSON.parse(localStorage.getItem(currentDay)) || [];
-  exercises.push({ name, reps, weight });
+  if (editIndex !== null) {
+    exercises[editIndex] = { name, reps, weight };
+  } else {
+    exercises.push({ name, reps, weight });
+  }
   localStorage.setItem(currentDay, JSON.stringify(exercises));
   renderList(exercises);
   form.reset();
+  editIndex = null;
+  submitBtn.textContent = 'Agregar';
 });
 
 buildNav();

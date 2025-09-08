@@ -37,6 +37,22 @@ main {
   background: #111;
   padding: 0.5rem;
   border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#exercise-list li div {
+  display: flex;
+  gap: 0.25rem;
+}
+
+#exercise-list li button {
+  background: #222;
+  color: #fff;
+  border: none;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
 }
 #exercise-form {
   display: flex;
