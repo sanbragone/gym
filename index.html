@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rutina de Gimnasio</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Rutina</h1>
+    <nav id="day-nav"></nav>
+  </header>
+  <main>
+    <ul id="exercise-list"></ul>
+    <form id="exercise-form">
+      <input id="exercise-name" placeholder="Ejercicio" required />
+      <input id="exercise-reps" type="number" placeholder="Reps" required />
+      <input id="exercise-weight" type="number" placeholder="Peso (kg)" required />
+      <button type="submit">Agregar</button>
+    </form>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
