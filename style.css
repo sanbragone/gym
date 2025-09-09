@@ -4,6 +4,28 @@ body {
   background: #000;
   color: #fff;
 }
+.hidden {
+  display: none;
+}
+.user-select {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.user-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.user-buttons button {
+  background: #222;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+}
 header {
   display: flex;
   justify-content: space-between;

@@ -7,20 +7,31 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
-    <h1>Rutina</h1>
-    <nav id="day-nav"></nav>
-  </header>
-  <main>
-    <ul id="exercise-list"></ul>
-    <form id="exercise-form">
-      <input id="exercise-name" placeholder="Ejercicio" required />
-      <input id="exercise-series" type="number" placeholder="Series" required />
-      <input id="exercise-reps" type="number" placeholder="Repeticiones" required />
-      <input id="exercise-weight" type="number" placeholder="Peso (kg)" required />
-      <button type="submit">Agregar</button>
-    </form>
-  </main>
+  <div id="user-select" class="user-select">
+    <h1>Elegir persona</h1>
+    <div class="user-buttons">
+      <button data-user="San">San</button>
+      <button data-user="Luchi">Luchi</button>
+    </div>
+  </div>
+
+  <div id="app" class="hidden">
+    <header>
+      <h1>Rutina</h1>
+      <nav id="day-nav"></nav>
+    </header>
+    <main>
+      <ul id="exercise-list"></ul>
+      <form id="exercise-form">
+        <input id="exercise-name" placeholder="Ejercicio" required />
+        <input id="exercise-series" type="number" placeholder="Series" required />
+        <input id="exercise-reps" type="number" placeholder="Repeticiones" required />
+        <input id="exercise-weight" type="number" placeholder="Peso (kg)" required />
+        <button type="submit">Agregar</button>
+      </form>
+    </main>
+  </div>
+
   <script src="app.js"></script>
 </body>
 </html>
